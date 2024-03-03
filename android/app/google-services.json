@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "141742505264",
+    "project_id": "lms-c741b",
+    "storage_bucket": "lms-c741b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141742505264:android:954fdbf2911857075e5cf5",
+        "android_client_info": {
+          "package_name": "com.openmnc.lms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXAnwnYwQOhvFXAjYXXFnA2Qj6QDOzM4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
