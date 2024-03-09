@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:lms/view/navbarPage.dart';
-import 'package:lms/view/welcome_page.dart';
+import 'package:lms/uttils/app%20router/app_router_config.dart';
+import 'package:lms/viewModel/payment/payment_controller.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,11 +35,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: deprecated_member_use
 
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      defaultTransition: Transition.downToUp,
-      home: welcom_page(),
-      // home: navbar(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => PaymentController()),
+      ],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: MyRoutersClass().goRouter,
+        // routeInformationParser: MyRoutersClass().goRouter.routeInformationParser,
+        // routerDelegate: MyRoutersClass().goRouter.routerDelegate,
+        // defaultTransition: Transition.downToUp,
+        // home: welcom_page(),
+        // home: navbar(),
+      ),
     );
   }
 }

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lms/model/image_text.dart';
+import 'package:lms/uttils/app%20router/app_router_config.dart';
+import 'package:lms/uttils/app%20router/app_router_static_name.dart';
 import 'package:lms/uttils/color.dart';
 import 'package:lms/uttils/container_style.dart';
 import 'package:lms/uttils/font_style.dart';
+import 'package:lms/view/nav_bar_navigate_page.dart/home/subject_display.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -12,6 +18,7 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -134,7 +141,7 @@ class _homeState extends State<home> {
                 ),
               ),
               SizedBox(
-                height: screenHeight * 0.05,
+                height: screenHeight * 0.02,
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -142,17 +149,35 @@ class _homeState extends State<home> {
                   children: [
                     // Add initial padding
                     SizedBox(
-                      width: screenWidth * 0.93, // Adjust the width as needed
+                      width: screenWidth * 0.94, // Adjust the width as needed
                       height: screenHeight * 0.2,
                       child: PageView.builder(
-                        itemCount: 3, // Number of containers
+                        controller: pageController,
+                        itemCount: Models.homeSubjectBannerImage
+                            .length, // Number of containers
+
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: screenWidth * 0.02),
-                            child: Container(
-                              decoration: ContainerDesigns.simpleContainer(
-                                color: containerLightColor,
+                          return InkWell(
+                            onTap: () {
+                              // context.goNamed(AppRouteName.login_signup);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => subject_info()));
+                              debugPrint("press ${index}");
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: screenWidth * 0.02),
+                              child: Container(
+                                decoration: ContainerDesigns.simpleContainer(
+                                  color: containerLightColor,
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image.asset(
+                                    Models.homeSubjectBannerImage[index],
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
                               ),
                             ),
                           );
@@ -161,6 +186,18 @@ class _homeState extends State<home> {
                     ),
                     // Add final padding
                   ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: screenHeight * 0.01),
+                child: SmoothPageIndicator(
+                  controller: pageController,
+                  count: Models.homeSubjectBannerImage.length,
+                  effect: ExpandingDotsEffect(
+                      activeDotColor: buttonColor,
+                      dotHeight: screenHeight * 0.008,
+                      dotWidth: screenWidth * 0.02,
+                      spacing: screenWidth * 0.02),
                 ),
               ),
             ],

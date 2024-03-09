@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:lms/uttils/color.dart';
 import 'package:lms/view/nav_bar_navigate_page.dart/account/account.dart';
-import 'package:lms/view/nav_bar_navigate_page.dart/book/book.dart';
+import 'package:lms/view/nav_bar_navigate_page.dart/event/event.dart';
 import 'package:lms/view/nav_bar_navigate_page.dart/chat/chat.dart';
 import 'package:lms/view/nav_bar_navigate_page.dart/home/home.dart';
 
@@ -19,7 +19,7 @@ class _navbarState extends State<navbar> {
   // Define pages to navigate to
   final List<Widget> _pages = [
     home(),
-    book(),
+    event(),
     chat(),
     account(),
   ];
@@ -53,12 +53,26 @@ class _navbarState extends State<navbar> {
               padding: EdgeInsets.all(screenWidth * 0.04),
               tabs: [
                 GButton(
+                  haptic: true,
                   icon: Icons.home,
+                  iconActiveColor: buttonColor,
                   text: "Home",
                 ),
-                GButton(icon: Icons.event_note, text: "Event"),
-                GButton(icon: Icons.work_history_rounded, text: "Placement"),
-                GButton(icon: Icons.person, text: "Account"),
+                GButton(
+                    haptic: true,
+                    icon: Icons.event_note,
+                    iconActiveColor: buttonColor,
+                    text: "Event"),
+                GButton(
+                    haptic: true,
+                    icon: Icons.work_history_rounded,
+                    iconActiveColor: buttonColor,
+                    text: "Placement"),
+                GButton(
+                    haptic: true,
+                    icon: Icons.person,
+                    iconActiveColor: buttonColor,
+                    text: "Account"),
               ],
             ),
           ),

@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+// import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lms/uttils/color.dart';
 import 'package:lms/uttils/container_style.dart';
 import 'package:lms/uttils/font_style.dart';
 import 'package:lms/uttils/paramitors.dart';
 import 'package:lms/uttils/show_pop_up.dart';
-import 'package:lms/viewModel/sign_in_auth.dart';
+import 'package:lms/viewModel/Authentication/sign_in_auth.dart';
 import 'package:vibration/vibration.dart';
 
 class login_signup extends StatelessWidget {
@@ -32,7 +33,8 @@ class login_signup extends StatelessWidget {
               child: IconButton(
                   onPressed: () {
                     Vibration.vibrate(duration: vibratioDuration);
-                    Get.back();
+                    // Get.back();
+                    GoRouter.of(context).pop();
                   },
                   icon: Icon(Icons.arrow_back_ios)),
             ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+// import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lms/uttils/app%20router/app_router_static_name.dart';
 import 'package:lms/uttils/color.dart';
 import 'package:lms/view/navbarPage.dart';
 import 'package:lottie/lottie.dart';
@@ -38,7 +40,8 @@ class CustomPopup extends StatelessWidget {
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                Get.to(() => navbar());
+                // Get.to(() => navbar());
+                context.goNamed(AppRouteName.navbar);
                 // You can add your continue button logic here
               },
               style: ElevatedButton.styleFrom(

@@ -19,4 +19,15 @@ class Models {
     "Study according to the study plan, make study more motivated",
     // Add more image URLs as neededs
   ];
+
+  //======================================================
+
+  static List<String> homeSubjectBannerImage = [
+    "assets/images/dbms.png",
+    "assets/images/Java.jpg",
+    "assets/images/os.png",
+    "assets/images/python.png",
+    "assets/images/soft_skills.jpeg",
+    "assets/images/cn.png",
+  ];
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lms/uttils/font_style.dart';
 
-class book extends StatelessWidget {
-  const book({super.key});
+class event extends StatelessWidget {
+  const event({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class book extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Text(
-          "Book",
+          "Events",
           style: Fontstyle.getHeading(screenWidth),
         ),
       ),

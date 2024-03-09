@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+// import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lms/main.dart';
 import 'package:lms/model/image_text.dart';
+import 'package:lms/uttils/app%20router/app_router_static_name.dart';
 import 'package:lms/uttils/color.dart';
 import 'package:lms/uttils/container_style.dart';
 import 'package:lms/uttils/font_style.dart';
@@ -110,7 +112,7 @@ class _welcom_pageState extends State<welcom_page> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  Get.to(login_signup());
+                                  context.goNamed(AppRouteName.login_signup);
                                   Vibration.vibrate(duration: vibratioDuration);
                                 },
                                 child: Container(
