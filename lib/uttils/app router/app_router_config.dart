@@ -12,88 +12,182 @@ import 'package:lms/view/navbarPage.dart';
 import 'package:lms/view/welcome_page.dart';
 
 class MyRoutersClass {
-  final MaterialApp android = MaterialApp();
-  final CupertinoApp ios = CupertinoApp();
+  
+  MyRoutersClass._();
 
-  GoRouter goRouter = GoRouter(
+  static String initial = "/home";
+
+// Private navigators
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shellroot');
+  static final _shellNavigatorHome =
+      GlobalKey<NavigatorState>(debugLabel: 'shellHome');
+  static final _shellNavigatorEvent =
+      GlobalKey<NavigatorState>(debugLabel: 'shellEvent');
+  static final _shellNavigatorChat =
+      GlobalKey<NavigatorState>(debugLabel: 'shellChat');
+  static final _shellNavigatorAccount =
+      GlobalKey<NavigatorState>(debugLabel: 'shellAccount');
+  static final _shellNavigatorSettings =
+      GlobalKey<NavigatorState>(debugLabel: 'shellSettings');
+
+  static final GoRouter router = GoRouter(
+    // initialLocation: AppRouteName.welcomePath,
+      initialLocation: initial,
+
+    debugLogDiagnostics: true,
+    navigatorKey: _rootNavigatorKey,
     routes: [
+
+
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return navbar(navigationShell: navigationShell);
+        },
+        branches: <StatefulShellBranch>[
+
+          /// Brach Home
+          StatefulShellBranch(
+            navigatorKey: _shellNavigatorHome,
+            routes: <RouteBase>[
+              GoRoute(
+                name: AppRouteName.home,
+                path: '/home',
+                builder: (context, state) => home(),
+                routes: [
+                  GoRoute(
+                    name: AppRouteName.subjectInfo,
+                    path: 'subject_info',
+                    pageBuilder: (context, state) => CustomTransitionPage<void>(
+                      child: subject_info(),
+                      transitionsBuilder: (BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation,
+                          Widget child) =>FadeTransition(opacity: animation, child: child),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          /// Brach event
+          StatefulShellBranch(
+            navigatorKey: _shellNavigatorEvent,
+            routes: <RouteBase>[
+              GoRoute(
+                name: AppRouteName.event,
+                path: '/event',
+                builder: (context, state) => event(),
+
+                // add sub router's
+                
+              ),
+            ],
+          ),
+
+          /// Brach chat
+          StatefulShellBranch(
+            navigatorKey: _shellNavigatorChat,
+            routes: <RouteBase>[
+              GoRoute(
+                name: AppRouteName.chat,
+                path: '/chat',
+                builder: (context, state) => chat(),
+
+                // add sub router's
+                
+              ),
+            ],
+          ),
+
+          /// Brach account
+          StatefulShellBranch(
+            navigatorKey: _shellNavigatorAccount,
+            routes: <RouteBase>[
+              GoRoute(
+                name: AppRouteName.account,
+                path: '/account',
+                builder: (context, state) => account(),
+
+                // add sub router's
+                
+              ),
+            ],
+          ),
+
+
+        ],
+      ),
+
       GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
         path: '/',
-        pageBuilder: (context, state) {
-          return MaterialPage(child: welcom_page());
-        },
-      ),
-      // GoRoute(
-      //   name: AppRouteName.welcome,
-      //   path: '/',
-      //   builder: (BuildContext context, GoRouterState state) {
-      //     return const welcom_page();
-      //   },
-      // ),
-      GoRoute(
-        name: AppRouteName.login_signup,
-        path: '/login_signup',
-        builder: (BuildContext context, GoRouterState state) {
-          return login_signup();
-        },
-      ),
-      GoRoute(
-        name: AppRouteName.home,
-        path: '/home',
-        builder: (BuildContext context, GoRouterState state) {
-          return home();
-        },
-      ),
-      GoRoute(
-        name: AppRouteName.book,
-        path: '/event',
-        builder: (BuildContext context, GoRouterState state) {
-          return event();
-        },
-      ),
-      GoRoute(
-        name: AppRouteName.chat,
-        path: '/chat',
-        builder: (BuildContext context, GoRouterState state) {
-          return chat();
-        },
-      ),
-      GoRoute(
-        name: AppRouteName.account,
-        path: '/account',
-        builder: (BuildContext context, GoRouterState state) {
-          return account();
-        },
-      ),
-      GoRoute(
-        name: AppRouteName.navbar,
-        path: '/navbar',
-        builder: (BuildContext context, GoRouterState state) {
-          return navbar();
-        },
-      ),
-      GoRoute(
-        name: AppRouteName.subjectInfo,
-        path: '/subject_info',
-        builder: (BuildContext context, GoRouterState state) {
-          return subject_info();
-        },
-      ),
-      // GoRoute(
-      //   name: AppRouteName.subjectInfo,
-      //   path: '/subject_info',
-      //   pageBuilder: (context, state) {
-      //     return MaterialPage(child: subject_info());
-      //   },
-      // ),
+        name: AppRouteName.welcome,
+        builder: (context, state) => welcom_page(
+          key: state.pageKey,
+        ),
+        routes: [
+          GoRoute(
+            name: AppRouteName.login_signup,
+            path: 'login_signup',
+            builder: (context, state) => login_signup(),
+          ),
+        ],
+      )
+    //   GoRoute(
+    //     name: AppRouteName.welcome,
+    //     path: '/',
+    //     builder: (context, state) =>
+    //         welcom_page(), // Assuming welcom_page is a widget
+        // routes: [
+        //   GoRoute(
+        //     name: AppRouteName.login_signup,
+        //     path: 'login_signup',
+        //     builder: (context, state) => login_signup(),
+        //   ),
+        // ],
+    //   ),
+    //   GoRoute(
+    //     name: AppRouteName.navbar,
+    //     path: '/navbar',
+    //     builder: (context, state) => navbar(),
+    //     routes: [
+    //       GoRoute(
+    //         name: 'home',
+    //         path: 'home',
+    //         builder: (context, state) => home(),
+    //         routes: [
+    //           GoRoute(
+    //             name: 'subject_info',
+    //             path: 'subject_info',
+    //             builder: (context, state) => subject_info(),
+    //           ),
+    //         ],
+    //       ),
+    //       GoRoute(
+    //         name: 'event',
+    //         path: 'event',
+    //         builder: (context, state) => event(),
+    //       ),
+    //       GoRoute(
+    //         name: 'chat',
+    //         path: 'chat',
+    //         builder: (context, state) => chat(),
+    //       ),
+    //       GoRoute(
+    //         name: 'account',
+    //         path: 'account',
+    //         builder: (context, state) => account(),
+    //       ),
+    //     ],
+    //   ),
     ],
     redirect: (context, state) {
-      bool isAuthenticated = true;
+      bool isAuthenticated = false;
 
       if (isAuthenticated == true) {
         return '/navbar';
       } else {
-        return '/';
+        return '/home';
       }
     },
   );

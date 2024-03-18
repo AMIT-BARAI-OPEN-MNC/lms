@@ -41,7 +41,8 @@ class CustomPopup extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Get.to(() => navbar());
-                context.goNamed(AppRouteName.navbar);
+                // context.go('/${AppRouteName.navbar}');
+                GoRouter.of(context).go('/navbar');
                 // You can add your continue button logic here
               },
               style: ElevatedButton.styleFrom(

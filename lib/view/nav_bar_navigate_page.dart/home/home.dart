@@ -153,15 +153,15 @@ class _homeState extends State<home> {
                       height: screenHeight * 0.2,
                       child: PageView.builder(
                         controller: pageController,
-                        itemCount: Models.homeSubjectBannerImage
-                            .length, // Number of containers
+                        itemCount: Models.homeSubjectBannerImage.length, // Number of containers
 
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              // context.goNamed(AppRouteName.login_signup);
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => subject_info()));
+                              context.goNamed("/home/subject_info");
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //     builder: (context) => subject_info()));
+                              
                               debugPrint("press ${index}");
                             },
                             child: Padding(

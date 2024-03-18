@@ -112,8 +112,8 @@ class _welcom_pageState extends State<welcom_page> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  context.goNamed(AppRouteName.login_signup);
-                                  Vibration.vibrate(duration: vibratioDuration);
+                                  context.go('/login_signup');
+                                  // Vibration.vibrate(duration: vibratioDuration);
                                 },
                                 child: Container(
                                   height: screenHeight * 0.07,
